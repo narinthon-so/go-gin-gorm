@@ -1,7 +1,7 @@
-// controllers/bookController.go
 package controllers
 
 import (
+	"log"
 	"net/http"
 	"strconv"
 
@@ -30,6 +30,7 @@ func GetBook(c *gin.Context) {
 func CreateBook(c *gin.Context) {
 	var book models.Book
 	if err := c.ShouldBindJSON(&book); err != nil {
+		log.Println("Validation error:", err)
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
@@ -46,6 +47,7 @@ func UpdateBook(c *gin.Context) {
 	}
 
 	if err := c.ShouldBindJSON(&book); err != nil {
+		log.Println("Validation error:", err)
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}

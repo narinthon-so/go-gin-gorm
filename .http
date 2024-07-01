@@ -9,32 +9,68 @@ Content-Type: application/json
 
 ### Get all books
 GET http://localhost:8080/api/books
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZXhwIjoxNzE5OTQwMjc2fQ.dih_vA1S0847qq2s3OZqhmj4MhwC1HX6nDEoY3xv0wc
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZXhwIjoxNzE5OTQxMzgyfQ.AjGWdVXSTihOgyP6BjSCHt8wu1h_2tHb94WyPkOTuaE
 
 ### Get a book by ID
 GET http://localhost:8080/api/books/1
 Authorization: Bearer <your_jwt_token>
 
-### Create a new book
+### Create a new book (valid)
 POST http://localhost:8080/api/books
 Content-Type: application/json
-Authorization: Bearer <your_jwt_token>
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZXhwIjoxNzE5OTQxMzgyfQ.AjGWdVXSTihOgyP6BjSCHt8wu1h_2tHb94WyPkOTuaE
 
 {
     "title": "The Great Gatsby 3",
     "author": "F. Scott Fitzgerald"
 }
 
-### Update a book by ID
-PUT http://localhost:8080/api/books/1
+### Create a new book (invalid - missing title)
+POST http://localhost:8080/api/books
 Content-Type: application/json
-Authorization: Bearer <your_jwt_token>
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZXhwIjoxNzE5OTQxMzgyfQ.AjGWdVXSTihOgyP6BjSCHt8wu1h_2tHb94WyPkOTuaE
+
+{
+    "author": "F. Scott Fitzgerald"
+}
+
+### Create a new book (invalid - missing author)
+POST http://localhost:8080/api/books
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZXhwIjoxNzE5OTQxMzgyfQ.AjGWdVXSTihOgyP6BjSCHt8wu1h_2tHb94WyPkOTuaE
+
+{
+    "title": "The Great Gatsby 4"
+}
+
+### Update a book by ID (valid)
+PUT http://localhost:8080/api/books/2
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZXhwIjoxNzE5OTQxMzgyfQ.AjGWdVXSTihOgyP6BjSCHt8wu1h_2tHb94WyPkOTuaE
 
 {
     "title": "The Great Gatsby 2",
     "author": "Francis Scott Fitzgerald"
 }
 
+### Update a book by ID (invalid - missing title)
+PUT http://localhost:8080/api/books/2
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZXhwIjoxNzE5OTQxMzgyfQ.AjGWdVXSTihOgyP6BjSCHt8wu1h_2tHb94WyPkOTuaE
+
+{
+    "author": "Francis Scott Fitzgerald"
+}
+
+### Update a book by ID (invalid - missing author)
+PUT http://localhost:8080/api/books/2
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZXhwIjoxNzE5OTQxMzgyfQ.AjGWdVXSTihOgyP6BjSCHt8wu1h_2tHb94WyPkOTuaE
+
+{
+    "title": "The Great Gatsby 44"
+}
+
 ### Delete a book by ID
-DELETE http://localhost:8080/api/books/1
-Authorization: Bearer <your_jwt_token>
+DELETE http://localhost:8080/api/books/2
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZXhwIjoxNzE5OTQxMzgyfQ.AjGWdVXSTihOgyP6BjSCHt8wu1h_2tHb94WyPkOTuaE
