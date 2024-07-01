@@ -1,7 +1,6 @@
 package controllers
 
 import (
-	"log"
 	"net/http"
 	"strconv"
 
@@ -13,7 +12,10 @@ import (
 
 func GetBooks(c *gin.Context) {
 	var books []models.Book
-	config.DB.Find(&books)
+	if err := config.DB.Find(&books).Error; err != nil {
+		c.Error(err)
+		return
+	}
 	c.JSON(http.StatusOK, books)
 }
 
@@ -21,7 +23,7 @@ func GetBook(c *gin.Context) {
 	id, _ := strconv.Atoi(c.Param("id"))
 	var book models.Book
 	if result := config.DB.First(&book, id); result.Error != nil {
-		c.JSON(http.StatusNotFound, gin.H{"error": "Book not found"})
+		c.Error(result.Error).SetType(gin.ErrorTypePublic).SetMeta("Book not found")
 		return
 	}
 	c.JSON(http.StatusOK, book)
@@ -30,11 +32,13 @@ func GetBook(c *gin.Context) {
 func CreateBook(c *gin.Context) {
 	var book models.Book
 	if err := c.ShouldBindJSON(&book); err != nil {
-		log.Println("Validation error:", err)
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		c.Error(err).SetType(gin.ErrorTypeBind)
 		return
 	}
-	config.DB.Create(&book)
+	if err := config.DB.Create(&book).Error; err != nil {
+		c.Error(err)
+		return
+	}
 	c.JSON(http.StatusCreated, book)
 }
 
@@ -42,17 +46,19 @@ func UpdateBook(c *gin.Context) {
 	id, _ := strconv.Atoi(c.Param("id"))
 	var book models.Book
 	if result := config.DB.First(&book, id); result.Error != nil {
-		c.JSON(http.StatusNotFound, gin.H{"error": "Book not found"})
+		c.Error(result.Error).SetType(gin.ErrorTypePublic).SetMeta("Book not found")
 		return
 	}
 
 	if err := c.ShouldBindJSON(&book); err != nil {
-		log.Println("Validation error:", err)
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		c.Error(err).SetType(gin.ErrorTypeBind)
 		return
 	}
 
-	config.DB.Save(&book)
+	if err := config.DB.Save(&book).Error; err != nil {
+		c.Error(err)
+		return
+	}
 	c.JSON(http.StatusOK, book)
 }
 
@@ -60,10 +66,13 @@ func DeleteBook(c *gin.Context) {
 	id, _ := strconv.Atoi(c.Param("id"))
 	var book models.Book
 	if result := config.DB.First(&book, id); result.Error != nil {
-		c.JSON(http.StatusNotFound, gin.H{"error": "Book not found"})
+		c.Error(result.Error).SetType(gin.ErrorTypePublic).SetMeta("Book not found")
 		return
 	}
 
-	config.DB.Delete(&book)
+	if err := config.DB.Delete(&book).Error; err != nil {
+		c.Error(err)
+		return
+	}
 	c.JSON(http.StatusOK, gin.H{"message": "Book deleted"})
 }

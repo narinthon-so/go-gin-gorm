@@ -12,8 +12,8 @@ GET http://localhost:8080/api/books
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZXhwIjoxNzE5OTQxMzgyfQ.AjGWdVXSTihOgyP6BjSCHt8wu1h_2tHb94WyPkOTuaE
 
 ### Get a book by ID
-GET http://localhost:8080/api/books/1
-Authorization: Bearer <your_jwt_token>
+GET http://localhost:8080/api/books/333
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZXhwIjoxNzE5OTQxMzgyfQ.AjGWdVXSTihOgyP6BjSCHt8wu1h_2tHb94WyPkOTuaE
 
 ### Create a new book (valid)
 POST http://localhost:8080/api/books
@@ -21,7 +21,7 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZXhwIjoxNzE5OTQxMzgyfQ.AjGWdVXSTihOgyP6BjSCHt8wu1h_2tHb94WyPkOTuaE
 
 {
-    "title": "The Great Gatsby 3",
+    "title": "The Great Gatsby dd",
     "author": "F. Scott Fitzgerald"
 }
 

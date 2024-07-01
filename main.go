@@ -2,6 +2,7 @@ package main
 
 import (
 	"go-gin-gorm/config"
+	"go-gin-gorm/middleware"
 	"go-gin-gorm/models"
 	"go-gin-gorm/routes"
 
@@ -16,6 +17,7 @@ func main() {
 	config.DB.AutoMigrate(&models.Book{})
 
 	r := gin.Default()
+	r.Use(middleware.ErrorHandler()) // Apply the custom error handler middleware
 	routes.SetupRoutes(r)
 	r.Run()
 }
