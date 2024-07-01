@@ -1,0 +1,40 @@
+### Login to get JWT token
+POST http://localhost:8080/auth/login
+Content-Type: application/json
+
+{
+    "username": "admin",
+    "password": "password"
+}
+
+### Get all books
+GET http://localhost:8080/api/books
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZXhwIjoxNzE5OTQwMjc2fQ.dih_vA1S0847qq2s3OZqhmj4MhwC1HX6nDEoY3xv0wc
+
+### Get a book by ID
+GET http://localhost:8080/api/books/1
+Authorization: Bearer <your_jwt_token>
+
+### Create a new book
+POST http://localhost:8080/api/books
+Content-Type: application/json
+Authorization: Bearer <your_jwt_token>
+
+{
+    "title": "The Great Gatsby 3",
+    "author": "F. Scott Fitzgerald"
+}
+
+### Update a book by ID
+PUT http://localhost:8080/api/books/1
+Content-Type: application/json
+Authorization: Bearer <your_jwt_token>
+
+{
+    "title": "The Great Gatsby 2",
+    "author": "Francis Scott Fitzgerald"
+}
+
+### Delete a book by ID
+DELETE http://localhost:8080/api/books/1
+Authorization: Bearer <your_jwt_token>
